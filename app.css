@@ -37,6 +37,8 @@ body {
   min-height: 100vh;
   font-family: "Plus Jakarta Sans", Arial, sans-serif;
   color: var(--text-light);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   background:
     radial-gradient(900px 520px at -12% -16%, rgba(37, 99, 235, 0.5), transparent 62%),
     radial-gradient(760px 460px at 108% -12%, rgba(13, 148, 136, 0.36), transparent 64%),
@@ -326,6 +328,13 @@ h1 {
   font-size: 16px;
   font-family: "Plus Jakarta Sans", Arial, sans-serif;
   transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+input,
+select,
+textarea,
+button {
+  font-size: 16px;
 }
 
 #urlInput:focus {

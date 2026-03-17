@@ -83,6 +83,13 @@
     altBtn.style.display = shouldShow ? "block" : "none";
   }
 
+  function blurActiveControl() {
+    const active = document.activeElement;
+    if (active && typeof active.blur === "function") {
+      active.blur();
+    }
+  }
+
   function sanitizeFilename(value) {
     return (value || "downloaded_media")
       .replace(/[^a-z0-9]/gi, "_")
@@ -290,6 +297,7 @@
   }
 
   async function findMedia() {
+    blurActiveControl();
     const normalizedUrl = normalizeInputUrl(urlInput.value);
     if (!normalizedUrl) {
       setStatus("Please enter a valid " + (config.platformName || "social") + " URL.", "err");
@@ -337,6 +345,7 @@
   }
 
   async function downloadMedia() {
+    blurActiveControl();
     if (!state.media || !state.media.url) {
       setStatus("Find media first.", "err");
       return;
@@ -370,6 +379,7 @@
     } finally {
       setDownloadBusy(false);
       setTimeout(resetProgress, 900);
+      blurActiveControl();
     }
   }
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <title>TikTok Video Downloader With Link | HD, SD, Audio</title>
   <meta name="description" content="TikTok video downloader with link. Paste any TikTok URL, choose HD, SD, or audio, preview the result, and download fast.">
   <meta name="keywords" content="tiktok downloader, tiktok video downloader with link, download tiktok video, tiktok mp4, tiktok mp3, save tiktok">
@@ -266,6 +266,13 @@
       progressFill.style.width = Math.max(0, Math.min(100, percent)) + "%";
     }
 
+    function blurActiveControl() {
+      const active = document.activeElement;
+      if (active && typeof active.blur === "function") {
+        active.blur();
+      }
+    }
+
     function sanitizeFilename(value) {
       return (value || "tiktok_video")
         .replace(/[^a-z0-9]/gi, "_")
@@ -321,6 +328,7 @@
     }
 
     async function findMedia() {
+      blurActiveControl();
       const normalizedUrl = normalizeTikTokUrl(urlInput.value);
       if (!normalizedUrl) {
         setStatus("Please enter a valid TikTok URL.", "err");
@@ -418,6 +426,7 @@
     }
 
     async function downloadMedia() {
+      blurActiveControl();
       if (!state.media || !state.media.url) {
         setStatus("Find a video first.", "err");
         return;
@@ -452,6 +461,7 @@
       } finally {
         setDownloadBusy(false);
         setTimeout(resetProgress, 900);
+        blurActiveControl();
       }
     }
 
