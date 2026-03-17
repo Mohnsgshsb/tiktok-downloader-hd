@@ -414,17 +414,20 @@ button {
   margin-top: 12px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
+  gap: 6px;
 }
 
 .mode-btn {
-  height: 50px;
-  border-radius: var(--radius-md);
+  min-height: 42px;
+  height: auto;
+  padding: 6px 7px;
+  border-radius: 10px;
   border: 1px solid #cad8f0;
   background: #ffffff;
   color: #1e293b;
-  font-size: 0.89rem;
+  font-size: 0.81rem;
   font-weight: 800;
+  line-height: 1.2;
   cursor: pointer;
   transition: all .2s ease;
 }
@@ -438,8 +441,8 @@ button {
 
 .mode-btn small {
   display: block;
-  margin-top: 1px;
-  font-size: 0.71rem;
+  margin-top: 0;
+  font-size: 0.63rem;
   font-weight: 600;
   color: #64748b;
 }
