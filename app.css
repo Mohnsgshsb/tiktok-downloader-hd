@@ -28,6 +28,8 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -321,7 +323,7 @@ h1 {
   padding: 0 14px;
   background: #ffffff;
   color: #111827;
-  font-size: 0.96rem;
+  font-size: 16px;
   font-family: "Plus Jakarta Sans", Arial, sans-serif;
   transition: border-color .2s ease, box-shadow .2s ease;
 }
