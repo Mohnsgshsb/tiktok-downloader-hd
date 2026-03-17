@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YouTube Downloader With Link | HD, SD, Audio</title>
+  <meta name="description" content="YouTube downloader with link. Paste YouTube video URL and download in HD, SD, or audio mode from a clean static web interface.">
+  <meta name="keywords" content="youtube downloader, youtube video downloader, youtu.be downloader, youtube mp4, youtube mp3">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://tiktokdownloader.online/youtube.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="YouTube Downloader With Link">
+  <meta property="og:description" content="YouTube downloader with link. Paste YouTube video URL and download in HD, SD, or audio mode from a clean static web interface.">
+  <meta property="og:url" content="https://tiktokdownloader.online/youtube.html">
+  <meta property="og:image" content="https://tiktokdownloader.online/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="YouTube Downloader With Link">
+  <meta name="twitter:description" content="YouTube downloader with link. Paste YouTube video URL and download in HD, SD, or audio mode from a clean static web interface.">
+  <meta name="twitter:image" content="https://tiktokdownloader.online/logo.png">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <meta name="theme-color" content="#0b1020">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3TDZE61768"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3TDZE61768');
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"YouTube Downloader With Link",
+    "url":"https://tiktokdownloader.online/youtube.html",
+    "description":"YouTube downloader with link. Paste YouTube video URL and download in HD, SD, or audio mode from a clean static web interface.",
+    "applicationCategory":"MultimediaApplication",
+    "operatingSystem":"All",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How do I download from YouTube?",
+        "acceptedAnswer":{"@type":"Answer","text":"Paste a valid YouTube link, choose mode, click Find Video, and then Download Now."}
+      },
+      {
+        "@type":"Question",
+        "name":"What if direct download fails?",
+        "acceptedAnswer":{"@type":"Answer","text":"Use the alternative button and open a compatible downloader page to complete your download."}
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="header-brand" href="index.html">
+        <img src="logo.png" alt="Downloader logo" width="30" height="30">
+        Full Downloader App
+      </a>
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="index.html" class="">TikTok</a>
+        <a href="instagram.html" class="">Instagram</a>
+        <a href="youtube.html" class="active">YouTube</a>
+        <a href="facebook.html" class="">Facebook</a>
+        <a href="twitter.html" class="">Twitter</a>
+        <a href="snapchat.html" class="">Snapchat</a>
+        <a href="#download">Tool</a>
+        <a href="#howto">How To Use</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <header class="hero">
+      <div class="brand">
+        <img src="logo.png" alt="YouTube downloader logo" width="20" height="20">
+        YouTube Downloader
+      </div>
+      <h1>YouTube Video Downloader With Link</h1>
+      <p>Paste your YouTube link, choose mode, and download from a fast and clean tool page.</p>
+      <div class="hero-badges">
+        <span>No app install</span>
+        <span>HD / SD / Audio</span>
+        <span>Fast link download</span>
+      </div>
+    </header><section id="download" class="card" aria-label="YouTube downloader tool">
+      <section class="tool-panel">
+        <h2>Download Tool</h2>
+        <label class="label" for="urlInput">YouTube Video Link</label>
+        <div class="url-row">
+          <input id="urlInput" type="text" placeholder="https://www.youtube.com/watch?v=xxxxxxxxxxx" autocomplete="off">
+          <button id="pasteBtn" class="btn btn-soft" type="button">Paste</button>
+        </div>
+
+        <label class="label" for="modeHd" style="margin-top:12px;">Download Mode</label>
+        <div class="mode-switch" role="radiogroup" aria-label="Download mode">
+          <button id="modeHd" class="mode-btn active" type="button" data-mode="hd" aria-pressed="true">
+            HD Video
+            <small>Best quality available</small>
+          </button>
+          <button class="mode-btn" type="button" data-mode="sd" aria-pressed="false">
+            SD Video
+            <small>Smaller file size</small>
+          </button>
+          <button class="mode-btn" type="button" data-mode="audio" aria-pressed="false">
+            Audio
+            <small>MP3 when available</small>
+          </button>
+        </div>
+
+        <button id="findBtn" class="btn btn-main" type="button">Find Video</button>
+        <button id="altBtn" class="btn btn-soft" type="button" style="margin-top:8px;display:none;">Open Alternative Downloader</button>
+        <div id="statusBox" class="status" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="preview-panel">
+        <h2>Preview</h2>
+        <div id="previewEmpty" class="preview-empty">
+          Your preview appears here after clicking <strong>Find Video</strong>.
+          Then click <strong>Download Now</strong> to save the file.
+        </div>
+
+        <article id="resultBox" class="result" aria-label="Found media">
+          <div class="result-head">
+            <img id="thumb" class="thumb" alt="YouTube preview image" loading="lazy">
+            <div>
+              <p id="metaTitle" class="meta-title"></p>
+              <p id="metaSub" class="meta-sub"></p>
+            </div>
+          </div>
+          <button id="downloadBtn" class="btn btn-main" type="button" disabled>Download Now</button>
+          <div id="progressBar" class="progress"><div id="progressFill"></div></div>
+        </article>
+      </section>
+    </section>
+
+    <section id="howto" class="howto" aria-label="How to use">
+      <h2>How To Use</h2>
+      <div class="steps">
+        <article class="step">
+          <div class="step-icon" aria-hidden="true">1</div>
+          <strong>Copy Link</strong>
+          <p>Copy a public YouTube URL from app or browser.</p>
+        </article>
+        <article class="step">
+          <div class="step-icon" aria-hidden="true">2</div>
+          <strong>Paste URL</strong>
+          <p>Paste your link and choose HD, SD, or Audio mode.</p>
+        </article>
+        <article class="step">
+          <div class="step-icon" aria-hidden="true">3</div>
+          <strong>Find Video</strong>
+          <p>Click Find Video and wait for the preview to load.</p>
+        </article>
+        <article class="step">
+          <div class="step-icon" aria-hidden="true">4</div>
+          <strong>Download</strong>
+          <p>Click Download Now. If blocked, use Alternative Downloader.</p>
+        </article>
+      </div>
+
+      <div class="seo-copy">
+        <strong>YouTube downloader:</strong> this static web page is optimized for mobile UI, fast loading, and SEO metadata while giving you a clean link-to-download workflow.
+      </div>
+    </section>
+    <section class="trust-grid" aria-label="Trust features">
+      <article class="trust-card">
+        <div class="trust-icon" aria-hidden="true">&#x1F6E1;</div>
+        <p class="trust-title">No Watermark</p>
+        <p class="trust-text">Clean videos</p>
+      </article>
+      <article class="trust-card">
+        <div class="trust-icon" aria-hidden="true">&#x26A1;</div>
+        <p class="trust-title">Fast Download</p>
+        <p class="trust-text">Direct to device</p>
+      </article>
+      <article class="trust-card">
+        <div class="trust-icon" aria-hidden="true">&#x1F512;</div>
+        <p class="trust-title">100% Safe</p>
+        <p class="trust-text">No registration</p>
+      </article>
+      <article class="trust-card">
+        <div class="trust-icon" aria-hidden="true">&#x1F4F1;</div>
+        <p class="trust-title">All Devices</p>
+        <p class="trust-text">Mobile &amp; Desktop</p>
+      </article>
+    </section>
+    <footer>
+      For educational use only. Respect creators, copyright, and local regulations.
+    </footer>
+  </main>
+
+  <script>
+    window.DOWNLOADER_CONFIG = {
+      platformName: "YouTube",
+      platformKey: "youtube",
+      validHosts: ["youtube.com","youtu.be","m.youtube.com","music.youtube.com"],
+      apiEndpoints: ["https://downloadapi.stuff.solutions/api/json"],
+      fallbackUrl: "https://cobalt.tools/?u={url}",
+      alwaysShowFallback: true,
+      defaultMode: "hd"
+    };
+  </script>
+  <script src="social-downloader.js"></script>
+</body>
+</html>

@@ -1,381 +1,483 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TikTok Video Downloader With Link | HD, SD, Audio</title>
+  <meta name="description" content="TikTok video downloader with link. Paste any TikTok URL, choose HD, SD, or audio, preview the result, and download fast.">
+  <meta name="keywords" content="tiktok downloader, tiktok video downloader with link, download tiktok video, tiktok mp4, tiktok mp3, save tiktok">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://tiktokdownloader.online/">
 
-<link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/logo.png">
-<link rel="apple-touch-icon" href="/logo.png">
-  
-<title>TikTok Downloader Pro - Direct Download</title>
-<meta name="description" content="Download TikTok videos without watermark in HD quality. Fast, free and secure TikTok downloader online.">
-<meta name="keywords" content="tiktok downloader, download tiktok video, tiktok mp4, tiktok mp3, save tiktok, tiktok no watermark, tiktok video downloader hd">
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<link rel="canonical" href="https://yourdomain.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TikTok Video Downloader With Link">
+  <meta property="og:description" content="Paste a TikTok link, select HD/SD/Audio, and download in one click.">
+  <meta property="og:url" content="https://tiktokdownloader.online/">
+  <meta property="og:image" content="https://tiktokdownloader.online/logo.png">
 
-<!-- OpenGraph -->
-<meta property="og:title" content="TikTok Downloader Pro">
-<meta property="og:description" content="Fastest TikTok downloader without watermark. Download videos instantly.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://yourdomain.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TikTok Video Downloader With Link">
+  <meta name="twitter:description" content="Free TikTok downloader by link with HD, SD and Audio modes.">
+  <meta name="twitter:image" content="https://tiktokdownloader.online/logo.png">
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="TikTok Downloader Pro">
-<meta name="twitter:description" content="Download TikTok videos in HD instantly.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <meta name="theme-color" content="#0b1020">
 
-<!-- Performance -->
-  <link rel="icon" href="https://www.tiktokdownloader.online/favicon.png" type="image/png">
-<link rel="shortcut icon" href="https://www.tiktokdownloader.online/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://www.tiktokdownloader.online/logo.png">
-  
-  <meta name="google" content="notranslate">
-<meta name="google" content="nositelinkssearchbox">
-  <link rel="preload" as="script" href="https://cdn.tailwindcss.com">
-<link rel="preload" as="script" href="https://unpkg.com/react@18/umd/react.production.min.js">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="dns-prefetch" href="//unpkg.com">
-<link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
 
-<!-- Google Analytics (REPLACE G-XXXXXXX WITH YOUR ID) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-3TDZE61768');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3TDZE61768"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3TDZE61768');
+  </script>
 
-<!-- Structured Data -->
-<script type="application/ld+json">
-{
-"@context":"https://schema.org",
-"@type":"WebApplication",
-"name":"TikTok Downloader Pro",
-"url":"https://tiktokdownloader.online/",
-"description":"Download TikTok videos without watermark in HD quality.",
-"applicationCategory":"MultimediaApplication",
-"operatingSystem":"All",
-"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","ratingCount":"1842"}
-}
-</script>
-  
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "Organization",
- "name": "TikTok Downloader Pro",
- "url": "https://www.tiktokdownloader.online/",
- "logo": "https://www.tiktokdownloader.online/logo.png"
-}
-</script>
-
-  <link rel="icon" href="/logo.png" sizes="32x32">
-
-
-<!-- React CDN -->
-<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-<!-- Tailwind -->
-<script src="https://cdn.tailwindcss.com"></script>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;}
-.glass-effect{background:rgba(255,255,255,.95);backdrop-filter:blur(10px);}
-.spinner{border:3px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:white;width:24px;height:24px;animation:spin 1s ease-in-out infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.fade-in{animation:fadeIn .5s ease-in;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-.progress-bar{height:4px;background:#e0e0e0;border-radius:2px;overflow:hidden;margin-top:10px;}
-.progress-fill{height:100%;background:linear-gradient(90deg,#667eea,#764ba2);transition:width .3s ease;}
-.quality-card{transition:all .3s ease;}
-.quality-card:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(102,126,234,.2);}
-.quality-card.selected{border-color:#667eea;background:linear-gradient(135deg,#667eea15,#764ba215);}
-</style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"TikTok Video Downloader With Link",
+    "url":"https://tiktokdownloader.online/",
+    "description":"Download TikTok videos and audio by link with HD, SD and audio modes.",
+    "applicationCategory":"MultimediaApplication",
+    "operatingSystem":"All",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How do I download TikTok videos with a link?",
+        "acceptedAnswer":{"@type":"Answer","text":"Paste a valid TikTok URL, choose the mode, click Find Video, then click Download Now."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can I download audio only?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. Select Audio mode before searching and then download the result."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why does download sometimes open a new tab?",
+        "acceptedAnswer":{"@type":"Answer","text":"Some browsers block cross-origin direct file streaming. In that case, the site opens the direct media URL as a fallback."}
+      }
+    ]
+  }
+  </script>
 </head>
-  <!-- ana zdthom -->
-  <script>
-document.lastModified = new Date().toUTCString();
-</script>
-<script>
-fetch("https://www.google.com/ping?sitemap=https://www.tiktokdownloader.online/sitemap.xml");
-</script>
-  <script>
-console.log("SEO Boost Active");
-</script>
-  
-   <!-- ana zdthom -->
 <body>
-<!-- Hidden SEO Content -->
-<div style="display:none">
-tiktok downloader, download tiktok video, save tiktok hd, tiktok mp3 converter,
-tiktok video downloader free, download tiktok without watermark, tiktok downloader online,
-fast tiktok downloader, best tiktok saver, tiktok mp4 download, tiktok video save tool,
-download tiktok clips, hd tiktok downloader, tiktok converter online
-</div>
-  <div style="display:none">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="header-brand" href="index.html">
+        <img src="logo.png" alt="Downloader logo" width="30" height="30">
+        Full Downloader App
+      </a>
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="index.html" class="active">TikTok</a>
+        <a href="instagram.html">Instagram</a>
+        <a href="youtube.html">YouTube</a>
+        <a href="facebook.html">Facebook</a>
+        <a href="twitter.html">Twitter</a>
+        <a href="snapchat.html">Snapchat</a>
+        <a href="#download">Tool</a>
+        <a href="#howto">How To Use</a>
+      </nav>
+    </div>
+  </header>
 
-tiktok downloader  
-download tiktok video  
-tiktok video download without watermark  
-save tiktok video online  
-download tiktok mp4 hd  
-tiktok downloader free  
-fast tiktok downloader  
-tiktok video saver  
-download tiktok audio mp3  
-online tiktok downloader tool  
+  <main class="shell">
+    <header class="hero">
+      <div class="brand">
+        <img src="logo.png" alt="TikTok downloader logo" width="20" height="20">
+        TikTok Downloader
+      </div>
+      <h1>TikTok Video Downloader With Link</h1>
+      <p>Paste your TikTok URL, choose HD, SD, or audio mode, preview the media, and download instantly.</p>
+      <div class="hero-badges">
+        <span>No app install</span>
+        <span>No watermark when available</span>
+        <span>HD / SD / Audio</span>
+      </div>
+    </header><section id="download" class="card" aria-label="TikTok downloader tool">
+      <section class="tool-panel">
+        <h2>Download Tool</h2>
+        <label class="label" for="urlInput">TikTok Video Link</label>
+        <div class="url-row">
+          <input id="urlInput" type="text" placeholder="https://www.tiktok.com/@username/video/1234567890" autocomplete="off">
+          <button id="pasteBtn" class="btn btn-soft" type="button">Paste</button>
+        </div>
 
-</div>
+        <label class="label" for="modeHd" style="margin-top:12px;">Download Mode</label>
+        <div class="mode-switch" role="radiogroup" aria-label="Download mode">
+          <button id="modeHd" class="mode-btn active" type="button" data-mode="hd" aria-pressed="true">
+            HD Video
+            <small>No watermark when available</small>
+          </button>
+          <button class="mode-btn" type="button" data-mode="sd" aria-pressed="false">
+            SD Video
+            <small>Standard quality</small>
+          </button>
+          <button class="mode-btn" type="button" data-mode="audio" aria-pressed="false">
+            Audio
+            <small>MP3 when available</small>
+          </button>
+        </div>
 
-<div id="root"></div>
+        <button id="findBtn" class="btn btn-main" type="button">Find Video</button>
+        <div id="statusBox" class="status" role="status" aria-live="polite"></div>
+      </section>
 
-<script type="text/babel">
-const {useState}=React;
+      <section class="preview-panel">
+        <h2>Preview</h2>
+        <div id="previewEmpty" class="preview-empty">
+          Your preview appears here after clicking <strong>Find Video</strong>.
+          Then click <strong>Download Now</strong> to save the file.
+        </div>
 
-const App=()=>(
-<div className="min-h-screen py-8 px-4">
-<Header/>
-<div className="max-w-4xl mx-auto space-y-6">
-<DownloadCard/>
-<Features/>
-<Footer/>
-</div>
-</div>
-);
+        <article id="resultBox" class="result" aria-label="Found media">
+          <div class="result-head">
+            <img id="thumb" class="thumb" alt="TikTok preview image" loading="lazy">
+            <div>
+              <p id="metaTitle" class="meta-title"></p>
+              <p id="metaSub" class="meta-sub"></p>
+            </div>
+          </div>
+          <button id="downloadBtn" class="btn btn-main" type="button" disabled>Download Now</button>
+          <div id="progressBar" class="progress"><div id="progressFill"></div></div>
+        </article>
+      </section>
+    </section>
 
-const Header=()=>(
-<header className="text-center mb-8">
-  
-<h1 className="text-4xl md:text-5xl font-bold text-white mb-2 flex items-center justify-center gap-4">
-  <img src="/logo1.png" alt="Logo" className="w-12 h-12"/>
-  TikTok Videos Downloader
-</h1>
-  
-<p className="text-white/80 text-lg">
-Direct download to your device - No waiting!
-</p>
-</header>
-);
+    <section id="howto" class="howto" aria-label="How to use">
+      <h2>How To Use</h2>
+      <div class="steps">
+        <article class="step">
+          <div class="step-icon" aria-hidden="true">1</div>
+          <strong>Copy Link</strong>
+          <p>Copy a public TikTok URL from app or browser.</p>
+        </article>
+        <article class="step">
+          <div class="step-icon" aria-hidden="true">2</div>
+          <strong>Paste URL</strong>
+          <p>Paste your link and choose HD, SD, or Audio mode.</p>
+        </article>
+        <article class="step">
+          <div class="step-icon" aria-hidden="true">3</div>
+          <strong>Find Video</strong>
+          <p>Click Find Video and wait for preview metadata to load.</p>
+        </article>
+        <article class="step">
+          <div class="step-icon" aria-hidden="true">4</div>
+          <strong>Download</strong>
+          <p>Click Download Now. If blocked, the app opens a fallback link.</p>
+        </article>
+      </div>
 
-const DownloadCard=()=>{
-const[url,setUrl]=useState('');
-const[quality,setQuality]=useState('hd');
-const[loading,setLoading]=useState(false);
-const[downloading,setDownloading]=useState(false);
-const[downloadProgress,setDownloadProgress]=useState(0);
-const[error,setError]=useState('');
-const[success,setSuccess]=useState('');
-const[videoInfo,setVideoInfo]=useState(null);
+      <div class="seo-copy">
+        <strong>TikTok downloader:</strong> this static page is optimized for speed, mobile UI, and SEO while keeping a clear link-to-download workflow.
+      </div>
+    </section>
+    <section class="trust-grid" aria-label="Trust features">
+      <article class="trust-card">
+        <div class="trust-icon" aria-hidden="true">&#x1F6E1;</div>
+        <p class="trust-title">No Watermark</p>
+        <p class="trust-text">Clean videos</p>
+      </article>
+      <article class="trust-card">
+        <div class="trust-icon" aria-hidden="true">&#x26A1;</div>
+        <p class="trust-title">Fast Download</p>
+        <p class="trust-text">Direct to device</p>
+      </article>
+      <article class="trust-card">
+        <div class="trust-icon" aria-hidden="true">&#x1F512;</div>
+        <p class="trust-title">100% Safe</p>
+        <p class="trust-text">No registration</p>
+      </article>
+      <article class="trust-card">
+        <div class="trust-icon" aria-hidden="true">&#x1F4F1;</div>
+        <p class="trust-title">All Devices</p>
+        <p class="trust-text">Mobile &amp; Desktop</p>
+      </article>
+    </section>
+    <footer>
+      For educational use only. Respect creators, copyright, and local regulations.
+    </footer>
+  </main>
 
-const pasteFromClipboard=async()=>{
-try{const text=await navigator.clipboard.readText();setUrl(text);}
-catch{setError('Cannot access clipboard');}
-};
+  <script>
+    const VALID_HOST = /(^|\.)tiktok\.com$/i;
+    const state = {
+      mode: "hd",
+      media: null
+    };
 
-const fetchVideo=async()=>{
-if(!url.trim()){setError('Please enter a TikTok URL');return;}
-if(!url.includes('tiktok.com')){setError('Please enter a valid TikTok URL');return;}
+    const urlInput = document.getElementById("urlInput");
+    const pasteBtn = document.getElementById("pasteBtn");
+    const findBtn = document.getElementById("findBtn");
+    const modeButtons = Array.from(document.querySelectorAll(".mode-btn"));
+    const statusBox = document.getElementById("statusBox");
 
-setLoading(true);setError('');setSuccess('');setVideoInfo(null);
+    const previewEmpty = document.getElementById("previewEmpty");
+    const resultBox = document.getElementById("resultBox");
+    const thumb = document.getElementById("thumb");
+    const metaTitle = document.getElementById("metaTitle");
+    const metaSub = document.getElementById("metaSub");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const progressBar = document.getElementById("progressBar");
+    const progressFill = document.getElementById("progressFill");
 
-try{
-const response=await fetch('https://www.tikwm.com/api/',{
-method:'POST',
-headers:{'Content-Type':'application/x-www-form-urlencoded'},
-body:`url=${encodeURIComponent(url)}&hd=${quality==='hd'?1:0}`
-});
-if(!response.ok)throw new Error();
-const data=await response.json();
+    function setStatus(message, type) {
+      if (!message) {
+        statusBox.textContent = "";
+        statusBox.style.display = "none";
+        return;
+      }
+      statusBox.textContent = message;
+      statusBox.className = "status " + (type || "ok");
+      statusBox.style.display = "block";
+    }
 
-if(data.data&&data.data.play){
-setVideoInfo({
-url:data.data.play,
-title:data.data.title||'TikTok Video',
-author:data.data.author?.nickname||'Unknown',
-cover:data.data.cover});
-setSuccess('Video found! Click "Download Now" to save to your device.');
-}else throw new Error();
-}catch{
-setError('Failed to fetch video. The API might be temporarily unavailable.');
-}finally{setLoading(false);}
-};
+    function setFindBusy(isBusy) {
+      findBtn.disabled = isBusy;
+      findBtn.textContent = isBusy ? "Finding..." : "Find Video";
+    }
 
-const downloadDirect=async()=>{
-if(!videoInfo)return;
-setDownloading(true);setDownloadProgress(0);
+    function setDownloadBusy(isBusy) {
+      downloadBtn.disabled = isBusy;
+      downloadBtn.textContent = isBusy ? "Downloading..." : "Download Now";
+    }
 
-try{
-const response=await fetch(videoInfo.url);
-if(!response.ok)throw new Error();
-const contentLength=response.headers.get('content-length');
-const total=parseInt(contentLength,10);
-let loaded=0;
+    function resetProgress() {
+      progressFill.style.width = "0%";
+      progressBar.style.display = "none";
+    }
 
-const reader=response.body.getReader();
-const stream=new ReadableStream({
-start(controller){
-function pump(){
-return reader.read().then(({done,value})=>{
-if(done){controller.close();return;}
-loaded+=value.byteLength;
-if(total){setDownloadProgress(Math.round((loaded/total)*100));}
-controller.enqueue(value);
-return pump();
-});
-}
-return pump();
-}
-});
+    function showProgress(percent) {
+      progressBar.style.display = "block";
+      progressFill.style.width = Math.max(0, Math.min(100, percent)) + "%";
+    }
 
-const blob=await new Response(stream).blob();
-const blobUrl=window.URL.createObjectURL(blob);
-const link=document.createElement('a');
-link.href=blobUrl;
-const filename=`${videoInfo.title.replace(/[^a-z0-9]/gi,'_')}_${quality}.mp4`;
-link.download=filename;
-document.body.appendChild(link);
-link.click();
-document.body.removeChild(link);
-window.URL.revokeObjectURL(blobUrl);
-setSuccess(`✅ Downloaded: ${filename}`);
-}catch{
-setError('Download failed. Trying alternative method...');
-window.open(videoInfo.url,'_blank');
-}finally{setDownloading(false);setDownloadProgress(0);}
-};
+    function sanitizeFilename(value) {
+      return (value || "tiktok_video")
+        .replace(/[^a-z0-9]/gi, "_")
+        .replace(/_+/g, "_")
+        .replace(/^_+|_+$/g, "")
+        .slice(0, 80) || "tiktok_video";
+    }
 
-return(
-<div className="glass-effect rounded-2xl p-6 md:p-8 shadow-2xl">
+    function normalizeTikTokUrl(input) {
+      const raw = (input || "").trim();
+      if (!raw) return "";
+      const withProtocol = /^https?:\/\//i.test(raw) ? raw : "https://" + raw;
+      try {
+        const parsed = new URL(withProtocol);
+        if (!VALID_HOST.test(parsed.hostname)) return "";
+        [
+          "utm_source",
+          "utm_medium",
+          "utm_campaign",
+          "is_copy_url",
+          "is_from_webapp",
+          "sender_device",
+          "share_app_id",
+          "tt_from"
+        ].forEach((param) => parsed.searchParams.delete(param));
+        return parsed.toString();
+      } catch {
+        return "";
+      }
+    }
 
-<div className="mb-6">
-<label className="block text-gray-700 font-semibold mb-2">TikTok Video URL</label>
-<div className="flex gap-2">
-<input type="text" value={url} onChange={e=>setUrl(e.target.value)}
-placeholder="https://www.tiktok.com/@username/video/1234567890"
-className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:outline-none"/>
-<button onClick={pasteFromClipboard}
-className="px-4 py-3 bg-gray-100 hover:bg-gray-200 rounded-xl">📋</button>
-</div>
-</div>
+    function getMediaUrl(data, mode) {
+      if (!data) return "";
+      if (mode === "audio") {
+        return data.music || (data.music_info && data.music_info.play) || "";
+      }
+      if (mode === "hd") {
+        return data.play || data.hdplay || data.wmplay || "";
+      }
+      return data.wmplay || data.play || data.hdplay || "";
+    }
 
-<div className="mb-6">
-<label className="block text-gray-700 font-semibold mb-3">Select Quality</label>
-<div className="grid grid-cols-3 gap-3">
-{[
-{id:'hd',icon:'🎬',label:'HD',desc:'Best Quality'},
-{id:'sd',icon:'📱',label:'SD',desc:'Smaller Size'},
-{id:'audio',icon:'🎵',label:'Audio',desc:'MP3 Only'}
-].map(q=>(
-<div key={q.id} onClick={()=>setQuality(q.id)}
-className={`quality-card cursor-pointer border-2 rounded-xl p-4 text-center ${
-quality===q.id?'selected border-indigo-500':'border-gray-200'
-}`}>
-<div className="text-2xl mb-1">{q.icon}</div>
-<div className="font-bold text-gray-800">{q.label}</div>
-<div className="text-xs text-gray-500">{q.desc}</div>
-</div>
-))}
-</div>
-</div>
+    function updateMode(nextMode) {
+      state.mode = nextMode;
+      modeButtons.forEach((btn) => {
+        const active = btn.dataset.mode === nextMode;
+        btn.classList.toggle("active", active);
+        btn.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+      if (state.media) {
+        metaSub.textContent = "Author: " + state.media.author + " | Mode: " + state.mode.toUpperCase();
+      }
+    }
 
-{!videoInfo&&(
-<button onClick={fetchVideo} disabled={loading}
-className="w-full py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold rounded-xl flex items-center justify-center gap-2">
-{loading?<><div className="spinner"></div><span>Finding video...</span></>:<>🔍 Find Video</>}
-</button>
-)}
+    async function findMedia() {
+      const normalizedUrl = normalizeTikTokUrl(urlInput.value);
+      if (!normalizedUrl) {
+        setStatus("Please enter a valid TikTok URL.", "err");
+        resultBox.style.display = "none";
+        previewEmpty.style.display = "block";
+        state.media = null;
+        downloadBtn.disabled = true;
+        return;
+      }
 
-{videoInfo&&!downloading&&(
-<div className="fade-in">
-<div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
-<h3 className="font-bold text-green-800 mb-1">✅ Video Found!</h3>
-<p className="text-sm text-green-700">{videoInfo.title}</p>
-<p className="text-xs text-green-600">👤 {videoInfo.author}</p>
-</div>
+      urlInput.value = normalizedUrl;
+      setFindBusy(true);
+      resetProgress();
+      setStatus("", "ok");
+      downloadBtn.disabled = true;
 
-<button onClick={downloadDirect}
-className="w-full py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-xl">
-⬇️ Download Now
-</button>
+      try {
+        const response = await fetch("https://www.tikwm.com/api/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: "url=" + encodeURIComponent(normalizedUrl) + "&hd=" + (state.mode === "hd" ? "1" : "0")
+        });
 
-<button onClick={()=>setVideoInfo(null)}
-className="w-full mt-2 py-2 text-gray-500 text-sm">
-← Search different video
-</button>
-</div>
-)}
+        if (!response.ok) throw new Error("api-fail");
+        const payload = await response.json();
+        const data = payload && payload.data;
+        const mediaUrl = getMediaUrl(data, state.mode);
+        if (!mediaUrl) throw new Error("media-missing");
 
-{downloading&&(
-<div className="bg-blue-50 rounded-xl p-6 text-center">
-<div className="spinner mx-auto mb-3"></div>
-<p className="text-blue-800 font-semibold">Downloading...</p>
-<p className="text-blue-600 text-sm">{downloadProgress}% complete</p>
-<div className="progress-bar">
-<div className="progress-fill" style={{width:`${downloadProgress}%`}}></div>
-</div>
-</div>
-)}
+        state.media = {
+          title: (data && data.title) || "TikTok Video",
+          author: (data && data.author && data.author.nickname) || "Unknown",
+          cover: (data && data.cover) || "logo.png",
+          url: mediaUrl,
+          type: state.mode === "audio" ? "audio" : "video"
+        };
 
-{error&&<div className="mt-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700">{error}</div>}
-{success&&!downloading&&<div className="mt-4 p-4 bg-green-50 border-l-4 border-green-500 text-green-700">{success}</div>}
-</div>
-);
-};
+        thumb.src = state.media.cover;
+        thumb.alt = state.media.title + " preview";
+        metaTitle.textContent = state.media.title;
+        metaSub.textContent = "Author: " + state.media.author + " | Mode: " + state.mode.toUpperCase();
+        previewEmpty.style.display = "none";
+        resultBox.style.display = "block";
+        downloadBtn.disabled = false;
+        setStatus("Video found. Click Download Now.", "ok");
+      } catch {
+        state.media = null;
+        previewEmpty.style.display = "block";
+        resultBox.style.display = "none";
+        downloadBtn.disabled = true;
+        setStatus("Could not fetch this TikTok URL. Try another public TikTok link.", "err");
+      } finally {
+        setFindBusy(false);
+      }
+    }
 
-const Features=()=>{
-const features=[
-{icon:'🛡️',title:'No Watermark',desc:'Clean videos'},
-{icon:'⚡',title:'Fast Download',desc:'Direct to device'},
-{icon:'🔒',title:'100% Safe',desc:'No registration'},
-{icon:'📱',title:'All Devices',desc:'Mobile & Desktop'}
-];
-return(
-<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-{features.map((f,i)=>(
-<div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center text-white border border-white/20">
-<div className="text-3xl mb-2">{f.icon}</div>
-<h3 className="font-semibold text-sm">{f.title}</h3>
-<p className="text-xs text-white/80">{f.desc}</p>
-</div>
-))}
-</div>
-);
-};
+    async function responseToBlobWithProgress(response, onProgress) {
+      if (!response.body || typeof response.body.getReader !== "function") {
+        onProgress(100);
+        return response.blob();
+      }
 
-const Footer=()=>(
-<footer className="text-center text-white/70 text-sm py-4">
-<p>⚠️ For educational purposes only. Respect copyright laws.</p>
-<p className="mt-1">© 2024 TikTok Downloader Pro. Not affiliated with TikTok.</p>
-</footer>
-);
+      const totalSize = Number.parseInt(response.headers.get("content-length") || "0", 10);
+      const reader = response.body.getReader();
+      let loadedSize = 0;
+      const chunks = [];
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
-</script>
+      while (true) {
+        const part = await reader.read();
+        if (part.done) break;
+        chunks.push(part.value);
+        loadedSize += part.value.byteLength;
+        if (totalSize > 0) {
+          onProgress(Math.round((loadedSize / totalSize) * 100));
+        }
+      }
 
-<!-- Behavior Signals for Crawlers -->
-<script>
-document.addEventListener("scroll",()=>{});
-document.addEventListener("click",()=>{});
-setTimeout(()=>{},30000);
-</script>
+      if (totalSize === 0) onProgress(95);
+      return new Blob(chunks);
+    }
 
+    function fallbackOpenSource(url) {
+      const openWindow = window.open(url, "_blank", "noopener,noreferrer");
+      if (!openWindow) {
+        const a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+    }
+
+    async function downloadMedia() {
+      if (!state.media || !state.media.url) {
+        setStatus("Find a video first.", "err");
+        return;
+      }
+
+      setDownloadBusy(true);
+      showProgress(0);
+
+      try {
+        const response = await fetch(state.media.url);
+        if (!response.ok) throw new Error("download-fail");
+
+        const blob = await responseToBlobWithProgress(response, showProgress);
+        showProgress(100);
+
+        const ext = state.media.type === "audio" ? "mp3" : "mp4";
+        const filename = sanitizeFilename(state.media.title) + "_" + state.mode + "." + ext;
+        const objectUrl = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = objectUrl;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(objectUrl);
+
+        setStatus("Downloaded: " + filename, "ok");
+      } catch {
+        setStatus("Direct download blocked by browser. Opening source URL instead.", "err");
+        fallbackOpenSource(state.media.url);
+      } finally {
+        setDownloadBusy(false);
+        setTimeout(resetProgress, 900);
+      }
+    }
+
+    pasteBtn.addEventListener("click", async () => {
+      try {
+        const clip = await navigator.clipboard.readText();
+        urlInput.value = (clip || "").trim();
+        setStatus("", "ok");
+      } catch {
+        setStatus("Clipboard access is blocked in this browser.", "err");
+      }
+    });
+
+    modeButtons.forEach((btn) => {
+      btn.addEventListener("click", () => updateMode(btn.dataset.mode));
+    });
+
+    findBtn.addEventListener("click", findMedia);
+    downloadBtn.addEventListener("click", downloadMedia);
+
+    urlInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        findMedia();
+      }
+    });
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
