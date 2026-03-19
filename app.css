@@ -44,73 +44,90 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: "Plus Jakarta Sans", Arial, sans-serif;
-  color: #ffffff;
+  color: var(--text-light);
   background:
-    radial-gradient(900px 520px at -12% -16%, rgba(255,0,0,0.35), transparent 62%),
-    radial-gradient(760px 460px at 108% -12%, rgba(180,0,0,0.25), transparent 64%),
-    linear-gradient(175deg, #0a0a0a 0%, #000000 65%);
+    radial-gradient(900px 520px at -12% -16%, rgba(255, 0, 0, 0.5), transparent 62%),
+    radial-gradient(760px 460px at 108% -12%, rgba(180, 0, 0, 0.36), transparent 64%),
+    linear-gradient(175deg, var(--bg-mid) 0%, var(--bg-main) 65%);
   overflow-x: hidden;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: auto -150px -180px auto;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 30%, rgba(255, 0, 0, 0.28), transparent);
+  filter: blur(6px);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
 .header-inner {
-  border: 1px solid rgba(255,0,0,0.35);
-  background: linear-gradient(120deg, rgba(20,0,0,0.9), rgba(40,0,0,0.85));
-  box-shadow: 0 12px 36px rgba(0,0,0,0.7);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  background: linear-gradient(120deg, rgba(20, 0, 0, 0.82), rgba(40, 0, 0, 0.78));
 }
 
 .header-nav a {
-  color: #ffffff;
-  border: 1px solid rgba(255,0,0,0.3);
-  background: rgba(255,0,0,0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  background: rgba(255, 0, 0, 0.05);
 }
 
 .header-nav a:hover {
-  background: rgba(255,0,0,0.18);
-  border-color: #ff0000;
+  border-color: rgba(255, 0, 0, 0.4);
+  background: rgba(255, 0, 0, 0.15);
 }
 
 .header-nav a.active {
   color: #fff;
-  background: linear-gradient(90deg,#ff0000,#b30000);
-  box-shadow: 0 0 18px rgba(255,0,0,0.6);
+  background: linear-gradient(98deg, #ff0000, #b30000);
+  box-shadow: 0 8px 20px rgba(255, 0, 0, 0.35);
 }
 
 .card {
-  border: 1px solid rgba(255,0,0,0.4);
-  background: linear-gradient(180deg,#0a0a0a,#140000);
-  color: #ffffff;
-  box-shadow: 0 30px 68px rgba(0,0,0,0.9);
+  border: 1px solid rgba(255, 0, 0, 0.35);
+  background: linear-gradient(180deg, rgba(20, 0, 0, 0.88), rgba(10, 0, 0, 0.93));
+  color: #fff;
 }
 
 .tool-panel,
 .preview-panel {
-  border: 1px solid #550000;
-  background: linear-gradient(180deg,#0a0a0a,#140000);
-  color: #ffffff;
+  border: 1px solid var(--line-soft);
+  background: linear-gradient(180deg, var(--panel-strong) 0%, #140000 100%);
+  color: #fff;
 }
 
 h1 {
-  color: #ffffff;
-  text-shadow: 0 0 25px rgba(255,0,0,0.5);
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
 }
 
 #urlInput {
   background: #0a0a0a;
-  color: #ffffff;
+  color: #fff;
   border: 1px solid #550000;
 }
 
 #urlInput:focus {
   border-color: #ff0000;
-  box-shadow: 0 0 0 3px rgba(255,0,0,0.3);
+  box-shadow: 0 0 0 4px rgba(255, 0, 0, 0.3);
 }
 
 .btn-main {
-  width: 100%;
-  margin-top: 12px;
-  color: #ffffff;
-  background: linear-gradient(90deg,#ff0000,#b30000);
-  box-shadow: 0 10px 30px rgba(255,0,0,0.6);
+  background: linear-gradient(100deg, var(--brand-a), var(--brand-b), var(--brand-c));
+  box-shadow: 0 16px 30px rgba(255, 0, 0, 0.4);
 }
 
 .btn-soft {
@@ -121,20 +138,19 @@ h1 {
 
 .mode-btn {
   background: #0a0a0a;
-  color: #ffffff;
+  color: #fff;
   border: 1px solid #550000;
 }
 
 .mode-btn.active {
-  background: linear-gradient(90deg,#ff0000,#b30000);
+  background: linear-gradient(180deg, #ff0000, #b30000);
   border-color: #ff0000;
-  box-shadow: 0 0 14px rgba(255,0,0,0.6);
+  box-shadow: 0 8px 22px rgba(255, 0, 0, 0.4);
 }
 
 .preview-empty {
-  background: #000;
   border: 1px dashed #ff0000;
-  color: #aaa;
+  background: #000;
 }
 
 .result {
@@ -143,11 +159,11 @@ h1 {
 }
 
 .meta-title {
-  color: #ffffff;
+  color: #fff;
 }
 
 .meta-sub {
-  color: #cccccc;
+  color: #ccc;
 }
 
 .progress {
@@ -155,13 +171,12 @@ h1 {
 }
 
 .progress > div {
-  background: linear-gradient(90deg,#ff0000,#ff4444);
+  background: linear-gradient(95deg, #ff0000, #ff4444);
 }
 
 .step {
   border: 1px solid #550000;
   background: #0a0a0a;
-  color: #ffffff;
 }
 
 .step-icon {
@@ -173,7 +188,7 @@ h1 {
 .seo-copy {
   background: #0a0a0a;
   border: 1px solid #550000;
-  color: #cccccc;
+  color: #ccc;
 }
 
 footer {
