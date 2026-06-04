@@ -4,6 +4,7 @@
   const config = window.DOWNLOADER_CONFIG || {};
   const platformKey = String(config.platformKey || "").toLowerCase();
   const alwaysShowFallback = !!config.alwaysShowFallback;
+  const isPinterestApi = !!config.isPinterestApi;
   const state = {
     mode: config.defaultMode || "hd",
     media: null,
@@ -59,7 +60,7 @@
 
   function setFindBusy(isBusy) {
     findBtn.disabled = isBusy;
-    findBtn.textContent = isBusy ? "Finding..." : "Find Video";
+    findBtn.textContent = isBusy ? "Finding..." : (isPinterestApi ? "Find Media" : "Find Video");
   }
 
   function setDownloadBusy(isBusy) {
@@ -104,7 +105,7 @@
     const idPattern = /^[a-zA-Z0-9_-]{11}$/;
     if (idPattern.test(raw)) return raw;
 
-    const withProtocol = /^https?:\/\//i.test(raw) ? raw : "https://" + raw;
+    const withProtocol = /^https?:\\/\\//i.test(raw) ? raw : "https://" + raw;
     try {
       const parsed = new URL(withProtocol);
       const host = parsed.hostname.toLowerCase();
@@ -145,7 +146,7 @@
       return "https://www.youtube.com/watch?v=" + videoId;
     }
 
-    const withProtocol = /^https?:\/\//i.test(raw) ? raw : "https://" + raw;
+    const withProtocol = /^https?:\\/\\//i.test(raw) ? raw : "https://" + raw;
     try {
       const parsed = new URL(withProtocol);
       const hostname = parsed.hostname.toLowerCase();
@@ -170,6 +171,11 @@
   }
 
   function pickMediaUrl(payload) {
+    // Pinterest API returns media_url directly
+    if (isPinterestApi && payload && typeof payload.media_url === "string" && payload.media_url) {
+      return payload.media_url;
+    }
+    // Standard cobalt-style response
     if (payload && typeof payload.url === "string" && payload.url) {
       return payload.url;
     }
@@ -182,8 +188,12 @@
   }
 
   function titleFromPayload(payload, fallbackUrl) {
+    // Pinterest API returns title
+    if (isPinterestApi && payload && typeof payload.title === "string" && payload.title) {
+      return payload.title;
+    }
     if (payload && typeof payload.filename === "string" && payload.filename) {
-      return payload.filename.replace(/\.[a-z0-9]{2,5}$/i, "");
+      return payload.filename.replace(/\\.[a-z0-9]{2,5}$/i, "");
     }
     try {
       const parsed = new URL(fallbackUrl);
@@ -193,7 +203,55 @@
     }
   }
 
-  async function fetchFromCobalt(sourceUrl, mode) {
+  function getMediaTypeFromUrl(url) {
+    if (!url) return "image";
+    const lower = url.toLowerCase();
+    if (lower.endsWith(".mp4") || lower.endsWith(".webm") || lower.endsWith(".mov")) return "video";
+    if (lower.endsWith(".mp3") || lower.endsWith(".m4a") || lower.endsWith(".ogg")) return "audio";
+    return "image";
+  }
+
+  async function fetchFromApi(sourceUrl, mode) {
+    // Pinterest API: GET request with url query parameter
+    if (isPinterestApi) {
+      const endpoint = config.apiEndpoint || "https://terbo-api.vercel.app/api/pindl";
+      const apiUrl = endpoint + "?url=" + encodeURIComponent(sourceUrl);
+      
+      try {
+        const response = await fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            "Accept": "application/json"
+          }
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        
+        if (!response.ok || payload.status !== true) {
+          const details = payload && (payload.message || payload.error);
+          throw new Error(details || "Could not fetch media from Pinterest.");
+        }
+
+        const mediaUrl = pickMediaUrl(payload);
+        if (!mediaUrl) {
+          throw new Error("No downloadable file was returned.");
+        }
+
+        const mediaType = getMediaTypeFromUrl(mediaUrl);
+        const title = titleFromPayload(payload, sourceUrl);
+
+        return {
+          url: mediaUrl,
+          title: title,
+          cover: mediaUrl,
+          type: mediaType
+        };
+      } catch (error) {
+        throw new Error(error.message || "Could not fetch media.");
+      }
+    }
+
+    // Standard Cobalt API: POST request
     const endpoints = Array.isArray(config.apiEndpoints) && config.apiEndpoints.length
       ? config.apiEndpoints
       : [config.apiEndpoint || "https://downloadapi.stuff.solutions/api/json"];
@@ -318,7 +376,7 @@
     downloadBtn.disabled = true;
 
     try {
-      const media = await fetchFromCobalt(normalizedUrl, state.mode);
+      const media = await fetchFromApi(normalizedUrl, state.mode);
       state.media = media;
       thumb.src = media.cover || "logo.png";
       thumb.alt = media.title + " preview";
@@ -360,7 +418,20 @@
       const blob = await responseToBlobWithProgress(response, showProgress);
       showProgress(100);
 
-      const ext = state.media.type === "audio" ? "mp3" : "mp4";
+      let ext;
+      if (state.media.type === "audio") {
+        ext = "mp3";
+      } else if (state.media.type === "video") {
+        ext = "mp4";
+      } else {
+        // Image - detect from URL or default to jpg
+        const urlLower = state.media.url.toLowerCase();
+        if (urlLower.endsWith(".png")) ext = "png";
+        else if (urlLower.endsWith(".gif")) ext = "gif";
+        else if (urlLower.endsWith(".webp")) ext = "webp";
+        else ext = "jpg";
+      }
+
       const filename = sanitizeFilename(state.media.title) + "_" + state.mode + "." + ext;
       const objectUrl = URL.createObjectURL(blob);
 
