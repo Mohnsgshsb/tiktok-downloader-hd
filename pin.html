@@ -28,7 +28,592 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="app.css">
+
+  <style>
+  :root {
+    --bg-main: #000000;
+    --bg-mid: #0a0a0a;
+    --bg-accent-a: #ff0000;
+    --bg-accent-b: #b30000;
+    --text-light: #ffffff;
+    --text-faint: #e5e5e5;
+    --ink-strong: #ffffff;
+    --ink-soft: #cccccc;
+    --line-soft: #330000;
+    --panel: rgba(20, 0, 0, 0.9);
+    --panel-strong: #140000;
+    --brand-a: #ff1a1a;
+    --brand-b: #ff3333;
+    --brand-c: #cc0000;
+    --ok: #22c55e;
+    --ok-bg: #052e16;
+    --err: #ff4d4f;
+    --err-bg: #2a0000;
+    --radius-xl: 28px;
+    --radius-lg: 18px;
+    --radius-md: 12px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Plus Jakarta Sans", Arial, sans-serif;
+    color: #ffffff;
+    background:
+      radial-gradient(900px 520px at -12% -16%, rgba(255,0,0,0.35), transparent 62%),
+      radial-gradient(760px 460px at 108% -12%, rgba(180,0,0,0.25), transparent 64%),
+      linear-gradient(175deg, #0a0a0a 0%, #000000 65%);
+    overflow-x: hidden;
+  }
+
+  /* Header */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 12px 16px;
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 20px;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255,0,0,0.35);
+    background: linear-gradient(120deg, rgba(20,0,0,0.9), rgba(40,0,0,0.85));
+    box-shadow: 0 12px 36px rgba(0,0,0,0.7);
+    flex-wrap: wrap;
+  }
+
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: "Outfit", sans-serif;
+    white-space: nowrap;
+  }
+
+  .header-brand img {
+    border-radius: 8px;
+  }
+
+  .header-nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .header-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,0,0,0.3);
+    background: rgba(255,0,0,0.08);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .header-nav a:hover {
+    background: rgba(255,0,0,0.18);
+    border-color: #ff0000;
+  }
+
+  .header-nav a.active {
+    color: #fff;
+    background: linear-gradient(90deg,#ff0000,#b30000);
+    box-shadow: 0 0 18px rgba(255,0,0,0.6);
+    border-color: #ff0000;
+  }
+
+  /* Main shell */
+  .shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 40px 16px 32px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #ff4444;
+    margin-bottom: 16px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,0,0,0.3);
+    background: rgba(255,0,0,0.08);
+  }
+
+  .brand img {
+    border-radius: 6px;
+  }
+
+  h1 {
+    font-family: "Outfit", sans-serif;
+    font-weight: 800;
+    font-size: clamp(26px, 5vw, 42px);
+    line-height: 1.15;
+    color: #ffffff;
+    text-shadow: 0 0 25px rgba(255,0,0,0.5);
+    margin: 0 0 14px;
+  }
+
+  .hero > p {
+    font-size: 16px;
+    color: #cccccc;
+    max-width: 520px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-badges span {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,0,0,0.3);
+    background: rgba(255,0,0,0.08);
+    color: #ffaaaa;
+  }
+
+  /* Card */
+  .card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 24px 0 40px;
+    padding: 28px;
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255,0,0,0.4);
+    background: linear-gradient(180deg,#0a0a0a,#140000);
+    color: #ffffff;
+    box-shadow: 0 30px 68px rgba(0,0,0,0.9);
+  }
+
+  @media (max-width: 800px) {
+    .card { grid-template-columns: 1fr; }
+  }
+
+  /* Tool & Preview panels */
+  .tool-panel,
+  .preview-panel {
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    border: 1px solid #550000;
+    background: linear-gradient(180deg,#0a0a0a,#140000);
+    color: #ffffff;
+  }
+
+  .tool-panel h2,
+  .preview-panel h2 {
+    font-family: "Outfit", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0 0 20px;
+    color: #ffffff;
+  }
+
+  .label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ff8888;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* URL Input */
+  .url-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  #urlInput {
+    flex: 1;
+    padding: 14px 18px;
+    font-size: 15px;
+    border-radius: var(--radius-md);
+    background: #0a0a0a;
+    color: #ffffff;
+    border: 1px solid #550000;
+    outline: none;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+
+  #urlInput::placeholder {
+    color: #666;
+  }
+
+  #urlInput:focus {
+    border-color: #ff0000;
+    box-shadow: 0 0 0 3px rgba(255,0,0,0.3);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-main {
+    width: 100%;
+    margin-top: 18px;
+    color: #ffffff;
+    background: linear-gradient(90deg,#ff0000,#b30000);
+    box-shadow: 0 10px 30px rgba(255,0,0,0.6);
+  }
+
+  .btn-main:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(255,0,0,0.7);
+  }
+
+  .btn-soft {
+    background: #140000;
+    color: #fff;
+    border: 1px solid #660000;
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+
+  .btn-soft:hover:not(:disabled) {
+    background: #220000;
+    border-color: #ff0000;
+  }
+
+  /* Mode Switch */
+  .mode-switch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 480px) {
+    .mode-switch { grid-template-columns: 1fr; }
+  }
+
+  .mode-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 14px 12px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    background: #0a0a0a;
+    color: #ffffff;
+    border: 1px solid #550000;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+  }
+
+  .mode-btn small {
+    font-size: 11px;
+    font-weight: 400;
+    color: #888;
+  }
+
+  .mode-btn:hover {
+    border-color: #ff0000;
+    background: #140000;
+  }
+
+  .mode-btn.active {
+    background: linear-gradient(90deg,#ff0000,#b30000);
+    border-color: #ff0000;
+    box-shadow: 0 0 14px rgba(255,0,0,0.6);
+  }
+
+  .mode-btn.active small {
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* Status */
+  .status {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 600;
+    display: none;
+  }
+
+  .status.ok {
+    display: block;
+    background: var(--ok-bg);
+    color: var(--ok);
+    border: 1px solid #166534;
+  }
+
+  .status.err {
+    display: block;
+    background: var(--err-bg);
+    color: var(--err);
+    border: 1px solid #7f1d1d;
+  }
+
+  /* Preview */
+  .preview-empty {
+    padding: 40px 24px;
+    text-align: center;
+    border-radius: var(--radius-md);
+    background: #000;
+    border: 1px dashed #ff0000;
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .preview-empty strong {
+    color: #ff6666;
+  }
+
+  /* Result */
+  .result {
+    display: none;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid #660000;
+    background: #0a0a0a;
+  }
+
+  .result-head {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  .thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #550000;
+    flex-shrink: 0;
+  }
+
+  .meta-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #ffffff;
+    margin: 0 0 6px;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+
+  .meta-sub {
+    font-size: 13px;
+    color: #cccccc;
+    margin: 0;
+  }
+
+  /* Progress */
+  .progress {
+    display: none;
+    height: 6px;
+    border-radius: 10px;
+    background: #140000;
+    margin-top: 14px;
+    overflow: hidden;
+  }
+
+  .progress > div {
+    height: 100%;
+    width: 0%;
+    border-radius: 10px;
+    background: linear-gradient(90deg,#ff0000,#ff4444);
+    transition: width 0.3s ease;
+  }
+
+  /* How To */
+  .howto {
+    margin: 40px 0;
+  }
+
+  .howto h2 {
+    font-family: "Outfit", sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    text-align: center;
+    margin: 0 0 28px;
+    color: #ffffff;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 800px) {
+    .steps { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    .steps { grid-template-columns: 1fr; }
+  }
+
+  .step {
+    padding: 24px 20px;
+    border-radius: var(--radius-lg);
+    border: 1px solid #550000;
+    background: #0a0a0a;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .step-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-family: "Outfit", sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    margin: 0 auto 14px;
+    background: #140000;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+  }
+
+  .step strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: #ffffff;
+  }
+
+  .step p {
+    font-size: 13px;
+    color: #aaa;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .seo-copy {
+    padding: 20px 24px;
+    border-radius: var(--radius-lg);
+    background: #0a0a0a;
+    border: 1px solid #550000;
+    color: #cccccc;
+    font-size: 14px;
+    line-height: 1.7;
+    text-align: center;
+  }
+
+  /* Trust Grid */
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 40px 0;
+  }
+
+  @media (max-width: 800px) {
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    .trust-grid { grid-template-columns: 1fr; }
+  }
+
+  .trust-card {
+    padding: 24px 16px;
+    text-align: center;
+    border-radius: var(--radius-lg);
+    border: 1px solid #550000;
+    background: linear-gradient(180deg,#0a0a0a,#140000);
+  }
+
+  .trust-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  .trust-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #ffffff;
+    margin: 0 0 4px;
+  }
+
+  .trust-text {
+    font-size: 13px;
+    color: #888;
+    margin: 0;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: #999;
+    font-size: 13px;
+    border-top: 1px solid #330000;
+    margin-top: 20px;
+  }
+  </style>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3TDZE61768"></script>
   <script>
@@ -77,12 +662,12 @@
         Full Downloader App
       </a>
       <nav class="header-nav" aria-label="Main navigation">
-        <a href="index.html" class="">TikTok</a>
-        <a href="instagram.html" class="">Instagram</a>
-        <a href="youtube.html" class="">YouTube</a>
-        <a href="facebook.html" class="">Facebook</a>
-        <a href="twitter.html" class="">Twitter</a>
-        <a href="snapchat.html" class="">Snapchat</a>
+        <a href="index.html">TikTok</a>
+        <a href="instagram.html">Instagram</a>
+        <a href="youtube.html">YouTube</a>
+        <a href="facebook.html">Facebook</a>
+        <a href="twitter.html">Twitter</a>
+        <a href="snapchat.html">Snapchat</a>
         <a href="pinterest.html" class="active">Pinterest</a>
         <a href="#download">Tool</a>
         <a href="#howto">How To Use</a>
@@ -114,7 +699,7 @@
           <button id="pasteBtn" class="btn btn-soft" type="button" aria-label="Paste link" title="Paste link">&#x1F4CB;</button>
         </div>
 
-        <label class="label" for="modeImage" style="margin-top:12px;">Download Mode</label>
+        <label class="label" for="modeImage" style="margin-top:16px;">Download Mode</label>
         <div class="mode-switch" role="radiogroup" aria-label="Download mode">
           <button id="modeImage" class="mode-btn active" type="button" data-mode="image" aria-pressed="true">
             Image
@@ -127,20 +712,20 @@
         </div>
 
         <button id="findBtn" class="btn btn-main" type="button">Find Media</button>
-        <button id="altBtn" class="btn btn-soft" type="button" style="margin-top:8px;display:none;">Open Alternative Downloader</button>
+        <button id="altBtn" class="btn btn-soft" type="button" style="margin-top:10px;display:none;width:100%;">Open Alternative Downloader</button>
         <div id="statusBox" class="status" role="status" aria-live="polite"></div>
       </section>
 
       <section class="preview-panel">
         <h2>Preview</h2>
         <div id="previewEmpty" class="preview-empty">
-          Your preview appears here after clicking <strong>Find Media</strong>.
+          Your preview appears here after clicking <strong>Find Media</strong>.<br>
           Then click <strong>Download Now</strong> to save the file.
         </div>
 
         <article id="resultBox" class="result" aria-label="Found media">
           <div class="result-head">
-            <img id="thumb" class="thumb" alt="Pinterest preview image" loading="lazy">
+            <img id="thumb" class="thumb" alt="Pinterest preview" loading="lazy">
             <div>
               <p id="metaTitle" class="meta-title"></p>
               <p id="metaSub" class="meta-sub"></p>

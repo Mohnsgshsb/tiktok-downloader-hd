@@ -28,24 +28,21 @@
   const altBtn = document.getElementById("altBtn");
 
   const trackingParams = [
-    "utm_source",
-    "utm_medium",
-    "utm_campaign",
-    "utm_term",
-    "utm_content",
-    "feature",
-    "si",
-    "fbclid",
-    "igshid",
-    "ig_rid",
-    "tt_from",
-    "is_copy_url",
-    "is_from_webapp",
-    "sender_device"
+    "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
+    "feature", "si", "fbclid", "igshid", "ig_rid", "tt_from",
+    "is_copy_url", "is_from_webapp", "sender_device"
   ];
 
   const validHosts = Array.isArray(config.validHosts) ? config.validHosts : [];
-  if (!urlInput || !findBtn || !downloadBtn) return;
+
+  if (!urlInput || !findBtn || !downloadBtn) {
+    console.error("[Downloader] Required elements not found!");
+    return;
+  }
+
+  console.log("[Downloader] Initialized for platform:", config.platformName);
+  console.log("[Downloader] API:", config.apiEndpoint);
+  console.log("[Downloader] isPinterestApi:", isPinterestApi);
 
   function setStatus(message, type) {
     if (!message) {
@@ -99,34 +96,6 @@
       .slice(0, 80) || "downloaded_media";
   }
 
-  function extractYouTubeVideoId(input) {
-    const raw = (input || "").trim();
-    if (!raw) return "";
-    const idPattern = /^[a-zA-Z0-9_-]{11}$/;
-    if (idPattern.test(raw)) return raw;
-
-    const withProtocol = /^https?:\\/\\//i.test(raw) ? raw : "https://" + raw;
-    try {
-      const parsed = new URL(withProtocol);
-      const host = parsed.hostname.toLowerCase();
-      if (host.endsWith("youtu.be")) {
-        const segment = parsed.pathname.split("/").filter(Boolean)[0] || "";
-        return idPattern.test(segment) ? segment : "";
-      }
-      if (host.includes("youtube.com")) {
-        const watchId = parsed.searchParams.get("v") || "";
-        if (idPattern.test(watchId)) return watchId;
-        const pathParts = parsed.pathname.split("/").filter(Boolean);
-        if (pathParts.length >= 2 && (pathParts[0] === "shorts" || pathParts[0] === "embed")) {
-          return idPattern.test(pathParts[1]) ? pathParts[1] : "";
-        }
-      }
-    } catch {
-      return "";
-    }
-    return "";
-  }
-
   function hostMatches(hostname) {
     if (!validHosts.length) return true;
     return validHosts.some((allowedHost) => {
@@ -139,21 +108,15 @@
     const raw = (input || "").trim();
     if (!raw) return "";
 
-    if (platformKey === "youtube") {
-      const videoId = extractYouTubeVideoId(raw);
-      if (!videoId) return "";
-      state.youtubeVideoId = videoId;
-      return "https://www.youtube.com/watch?v=" + videoId;
-    }
-
-    const withProtocol = /^https?:\\/\\//i.test(raw) ? raw : "https://" + raw;
+    const withProtocol = /^https?:\/\//i.test(raw) ? raw : "https://" + raw;
     try {
       const parsed = new URL(withProtocol);
       const hostname = parsed.hostname.toLowerCase();
       if (!hostMatches(hostname)) return "";
       trackingParams.forEach((param) => parsed.searchParams.delete(param));
       return parsed.toString();
-    } catch {
+    } catch (e) {
+      console.error("[Downloader] URL parse error:", e);
       return "";
     }
   }
@@ -171,11 +134,9 @@
   }
 
   function pickMediaUrl(payload) {
-    // Pinterest API returns media_url directly
     if (isPinterestApi && payload && typeof payload.media_url === "string" && payload.media_url) {
       return payload.media_url;
     }
-    // Standard cobalt-style response
     if (payload && typeof payload.url === "string" && payload.url) {
       return payload.url;
     }
@@ -188,12 +149,11 @@
   }
 
   function titleFromPayload(payload, fallbackUrl) {
-    // Pinterest API returns title
     if (isPinterestApi && payload && typeof payload.title === "string" && payload.title) {
       return payload.title;
     }
     if (payload && typeof payload.filename === "string" && payload.filename) {
-      return payload.filename.replace(/\\.[a-z0-9]{2,5}$/i, "");
+      return payload.filename.replace(/\.[a-z0-9]{2,5}$/i, "");
     }
     try {
       const parsed = new URL(fallbackUrl);
@@ -212,24 +172,36 @@
   }
 
   async function fetchFromApi(sourceUrl, mode) {
-    // Pinterest API: GET request with url query parameter
     if (isPinterestApi) {
       const endpoint = config.apiEndpoint || "https://terbo-api.vercel.app/api/pindl";
       const apiUrl = endpoint + "?url=" + encodeURIComponent(sourceUrl);
-      
+
+      console.log("[Downloader] Fetching Pinterest API:", apiUrl);
+
       try {
         const response = await fetch(apiUrl, {
           method: "GET",
-          headers: {
-            "Accept": "application/json"
-          }
+          headers: { "Accept": "application/json" }
         });
 
-        const payload = await response.json().catch(() => ({}));
-        
-        if (!response.ok || payload.status !== true) {
-          const details = payload && (payload.message || payload.error);
-          throw new Error(details || "Could not fetch media from Pinterest.");
+        let payload;
+        try {
+          payload = await response.json();
+        } catch (e) {
+          console.error("[Downloader] JSON parse error:", e);
+          throw new Error("Invalid response from server.");
+        }
+
+        console.log("[Downloader] API Response:", payload);
+
+        if (!response.ok) {
+          const details = payload && (payload.message || payload.error || "Server error " + response.status);
+          throw new Error(details);
+        }
+
+        if (payload.status !== true) {
+          const details = payload && (payload.message || payload.error || "API returned error status.");
+          throw new Error(details);
         }
 
         const mediaUrl = pickMediaUrl(payload);
@@ -247,6 +219,7 @@
           type: mediaType
         };
       } catch (error) {
+        console.error("[Downloader] Pinterest API error:", error);
         throw new Error(error.message || "Could not fetch media.");
       }
     }
@@ -357,6 +330,10 @@
   async function findMedia() {
     blurActiveControl();
     const normalizedUrl = normalizeInputUrl(urlInput.value);
+
+    console.log("[Downloader] Input:", urlInput.value);
+    console.log("[Downloader] Normalized:", normalizedUrl);
+
     if (!normalizedUrl) {
       setStatus("Please enter a valid " + (config.platformName || "social") + " URL.", "err");
       previewEmpty.style.display = "block";
@@ -377,17 +354,20 @@
 
     try {
       const media = await fetchFromApi(normalizedUrl, state.mode);
+      console.log("[Downloader] Media found:", media);
+
       state.media = media;
       thumb.src = media.cover || "logo.png";
       thumb.alt = media.title + " preview";
       metaTitle.textContent = media.title;
-      metaSub.textContent = "Mode: " + state.mode.toUpperCase();
+      metaSub.textContent = "Mode: " + state.mode.toUpperCase() + " | Type: " + media.type.toUpperCase();
       previewEmpty.style.display = "none";
       resultBox.style.display = "block";
       downloadBtn.disabled = false;
       setAlternativeButtonVisible(false);
-      setStatus("Media found. Click Download Now.", "ok");
+      setStatus("Media found! Click Download Now.", "ok");
     } catch (error) {
+      console.error("[Downloader] Find error:", error);
       state.media = null;
       previewEmpty.style.display = "block";
       resultBox.style.display = "none";
@@ -424,7 +404,6 @@
       } else if (state.media.type === "video") {
         ext = "mp4";
       } else {
-        // Image - detect from URL or default to jpg
         const urlLower = state.media.url.toLowerCase();
         if (urlLower.endsWith(".png")) ext = "png";
         else if (urlLower.endsWith(".gif")) ext = "gif";
@@ -444,7 +423,8 @@
       URL.revokeObjectURL(objectUrl);
 
       setStatus("Downloaded: " + filename, "ok");
-    } catch {
+    } catch (e) {
+      console.error("[Downloader] Download error:", e);
       setStatus("Direct download blocked by browser. Opening source URL instead.", "err");
       fallbackOpenSource(state.media.url);
     } finally {
@@ -454,6 +434,7 @@
     }
   }
 
+  // Event Listeners
   pasteBtn.addEventListener("click", async () => {
     try {
       const clipText = await navigator.clipboard.readText();
@@ -485,4 +466,6 @@
       findMedia();
     }
   });
+
+  console.log("[Downloader] All event listeners attached successfully!");
 })();
